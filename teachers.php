@@ -53,7 +53,7 @@ if(!isset($_SESSION['id'])) {
                     <a class="nav-link" href="students.php">students</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profiles</a>
+                    <a class="nav-link" href="#">profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="login.html">Logout</a>
@@ -91,53 +91,53 @@ if(!isset($_SESSION['id'])) {
 
             <!-- Dashboard Main Content -->
             <div class="container mt-4">
-                <h1>Welcome to registration </h1>
-                <p class="lead">Here you can register as either a teacher or a student..</p>
-
-                <!-- Stats Cards -->
-                <div class="row mt-5">
-                    <div class="col-md-4">
-                        <div class="card text-white bg-dark">
-                            <div class="card-body">
-                                <h5 class="card-title">teachers</h5>
-                                <p>
-                                <?php
-                             $teachers= mysqli_query($con, "SELECT * FROM teachers");  
-                                echo mysqli_num_rows($teachers);
-                           ?>
-                                </p>
-                            </div>
-                        </div>
+                
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h1>teachers list</h1>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card text-white bg-dark">
-                            <div class="card-body">
-                                <h5 class="card-title">students</h5>
-                                <p>
+                    <div class="card-body">
+                        
+                        <table class="table table-stripped">
+                            <tr>
+                                <th>#</th>
+                                <th>FIRSTNAME</th>
+                                <th>LASTNAME</th>
+                                <th>ID</th>
+                                <th>USERNAME</th>
+                                <th>ACTION</th>
+                                
+                            </tr>
+                            <tr> <?php $A=mysqli_query($con,"select * from teachers");
+                            $i=1; 
+                            while ($row=mysqli_fetch_array($A))
+                            {
+                                ?>
+                                <tr>
+                                    <td><?php
+                                    echo $i
+                                    ?></td>
+                                    <td><?php echo $row['firstname']  ?> </td>
+                                    <td><?php echo $row['lastname']  ?> </td>
+                                    <td><?php echo $row['id']  ?> </td>
+                                    <td><?php echo $row['username']  ?> </td>
+                                    <td>
+                                        <a href="edit.php" class="btn btn-info btn-sm">Edit</a>
+                                        <a href="delete.php" class="btn btn-danger btn-sm">Delete</a>
+                                    </td>
+                                </tr>
                                 <?php
-                             $A= mysqli_query($con, "SELECT * FROM students ");  
-                                echo mysqli_num_rows($A);
-                           ?>
-                                </p>
-                            </div>
-                        </div>
+                                $i=$i+1;
+                            }
+                             ?>
+                               
+                            </tr>
+                        
+                        </table>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card text-white bg-dark">
-                            <div class="card-body">
-                                <h5 class="card-title">register</h5>
-                                <p>
-                                <?php
-                             $register= mysqli_query($con, "SELECT * FROM register");  
-                                echo mysqli_num_rows($register);
-                           ?>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
                 </div>
-
+                    
+            
                 <!-- Recent Activity Section -->
                 
             </div>

@@ -1,5 +1,6 @@
 <?php
 include 'connection.php';
+session_start();
 if(isset($_POST['submit'])){
     $username = $_POST['uname'];
     $password = $_POST['pass'];
@@ -14,7 +15,7 @@ if(isset($_POST['submit'])){
             $_SESSION['id'] = $row['id'];
             $_SESSION['username'] = $row['username'];
             $_SESSION['role'] = $row['type'];
-            
+
             header("Location: home.php");
  }
 }?>

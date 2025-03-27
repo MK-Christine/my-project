@@ -6,6 +6,19 @@ if(!isset($_SESSION['id'])) {
    header("Location: login.php");
 }
 
+
+if(isset($_POST['submit'])){
+    $firstname = $_POST['fname'];
+    $lastname = $_POST['lname'];
+    $department = $_POST['dpt'];
+    $regno = $_POST['regno'];
+    
+    $insert=mysqli_query($con, "insert into students values(null,'$firstname','$lastname','$department','$regno','')");
+    if($insert){
+        header("location:students.php");
+    }
+ }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +66,7 @@ if(!isset($_SESSION['id'])) {
                     <a class="nav-link" href="students.php">students</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profiles</a>
+                    <a class="nav-link" href="#">profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="login.html">Logout</a>
@@ -91,53 +104,27 @@ if(!isset($_SESSION['id'])) {
 
             <!-- Dashboard Main Content -->
             <div class="container mt-4">
-                <h1>Welcome to registration </h1>
-                <p class="lead">Here you can register as either a teacher or a student..</p>
-
-                <!-- Stats Cards -->
-                <div class="row mt-5">
-                    <div class="col-md-4">
-                        <div class="card text-white bg-dark">
-                            <div class="card-body">
-                                <h5 class="card-title">teachers</h5>
-                                <p>
-                                <?php
-                             $teachers= mysqli_query($con, "SELECT * FROM teachers");  
-                                echo mysqli_num_rows($teachers);
-                           ?>
-                                </p>
-                            </div>
+                
+            <div class=" row mt-5">
+   <div class="col-3"></div>
+             <div class="col-6">
+              
+                         <div class="card shadow mt-5">
+                      <div class="card-body">
+                      <h3 class="mb-4">new student </h3>
+                        <form action="" method="post">
+                        <input type="text" placeholder="firstname" class="form-control mt-2" name="fname">
+                        <input type="password" placeholder="lastname" class="form-control mt-2" name="lname">  
+                        
+                        <input type="password" placeholder="regno" class="form-control mt-2"name="regno" >           
+                        <input type="password" placeholder="department" class="form-control mt-2" name="dpt">           
+                        <input type="submit"  class= "btn btn-primary mt-3" name="submit">
+                        
+                        </form>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card text-white bg-dark">
-                            <div class="card-body">
-                                <h5 class="card-title">students</h5>
-                                <p>
-                                <?php
-                             $A= mysqli_query($con, "SELECT * FROM students ");  
-                                echo mysqli_num_rows($A);
-                           ?>
-                                </p>
-                            </div>
-                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card text-white bg-dark">
-                            <div class="card-body">
-                                <h5 class="card-title">register</h5>
-                                <p>
-                                <?php
-                             $register= mysqli_query($con, "SELECT * FROM register");  
-                                echo mysqli_num_rows($register);
-                           ?>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-
+            
                 <!-- Recent Activity Section -->
                 
             </div>
