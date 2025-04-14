@@ -56,7 +56,7 @@ if(!isset($_SESSION['id'])) {
                     <a class="nav-link" href="#">Profiles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Logout</a>
+                    <a class="nav-link" href="logout.php">Logout</a>
                 </li>
             </ul>
         </div>
@@ -82,7 +82,7 @@ if(!isset($_SESSION['id'])) {
                                 <a class="nav-link" href="#">Contact</a>
                             </li>
                             <div>
-                <span class=" me-3">👤 kety </span>
+                <span class=" me-3">👤 <?php echo $_SESSION['username']?> </span>
             </div>
                         </ul>
                     </div>

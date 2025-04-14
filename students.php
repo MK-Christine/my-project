@@ -56,7 +56,7 @@ if(!isset($_SESSION['id'])) {
                     <a class="nav-link" href="#">profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Logout</a>
+                    <a class="nav-link" href="logout.php">Logout</a>
                 </li>
             </ul>
         </div>
@@ -124,8 +124,8 @@ if(!isset($_SESSION['id'])) {
                                     <td><?php echo $row['regno']  ?> </td>
                                     <td><?php echo $row['department']  ?> </td>
                                     <td>
-                                        <a href="edit.php" class="btn btn-info btn-sm">Edit</a>
-                                        <a href="delete.php" class="btn btn-danger btn-sm">Delete</a>
+                                        <a href="edit.php?id=<?php echo $row['id']?>" class="btn btn-info btn-sm">Edit</a>
+                                        <a href="delete.php?id=<?php echo $row['id']?>" class="btn btn-danger btn-sm">Delete</a>
                                     </td>
                                 </tr>
                                 <?php

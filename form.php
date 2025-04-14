@@ -3,9 +3,8 @@ include 'connection.php';
 session_start();
 if(!isset($_SESSION['id'])) {
     echo $_SESSION['id'];
-   header("Location: login.php");
+   header("Location: students.php");
 }
-
 
 if(isset($_POST['submit'])){
     $firstname = $_POST['fname'];
@@ -15,7 +14,7 @@ if(isset($_POST['submit'])){
     
     $insert=mysqli_query($con, "insert into students values(null,'$firstname','$lastname','$department','$regno','')");
     if($insert){
-        header("location:students.php");
+        header("location:login.php");
     }
  }
 
@@ -69,7 +68,7 @@ if(isset($_POST['submit'])){
                     <a class="nav-link" href="#">profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Logout</a>
+                    <a class="nav-link" href="logout.php">Logout</a>
                 </li>
             </ul>
         </div>
@@ -95,7 +94,7 @@ if(isset($_POST['submit'])){
                                 <a class="nav-link" href="#">Contact</a>
                             </li>
                             <div>
-                <span class=" me-3">👤 kety </span>
+                <span class=" me-3">👤  <?php echo $_session['username']?> </span>
             </div>
                         </ul>
                     </div>
@@ -114,10 +113,10 @@ if(isset($_POST['submit'])){
                       <h3 class="mb-4">new student </h3>
                         <form action="" method="post">
                         <input type="text" placeholder="firstname" class="form-control mt-2" name="fname">
-                        <input type="password" placeholder="lastname" class="form-control mt-2" name="lname">  
+                        <input type="text" placeholder="lastname" class="form-control mt-2" name="lname">  
                         
-                        <input type="password" placeholder="regno" class="form-control mt-2"name="regno" >           
-                        <input type="password" placeholder="department" class="form-control mt-2" name="dpt">           
+                        <input type="text" placeholder="regno" class="form-control mt-2"name="regno" >           
+                        <input type="text" placeholder="department" class="form-control mt-2" name="dpt">           
                         <input type="submit"  class= "btn btn-primary mt-3" name="submit">
                         
                         </form>

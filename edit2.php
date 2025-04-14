@@ -2,9 +2,26 @@
 include 'connection.php';
 session_start();
 if(!isset($_SESSION['id'])) {
-    echo $_SESSION['id'];
    header("Location: login.php");
 }
+
+
+$id = $_GET['id'];
+$stud=mysqli_query($con, "select * from teachers where id=$id");
+$row = mysqli_fetch_array($stud);
+
+if(isset($_POST ['submit'])) {
+   $firstname=$_POST ['fname'];
+   $lastname=$_POST ['lname'];
+   $username=$_POST ['uname'];
+  
+
+   $insert=mysqli_query($con, "UPDATE teachers SET firstname='$firstname',lastname='$lastname',username='$username' where id=$id ");
+   if($insert){
+    header("location:teachers.php");
+}
+
+ }
 
 ?>
 <!DOCTYPE html>
@@ -82,7 +99,7 @@ if(!isset($_SESSION['id'])) {
                                 <a class="nav-link" href="#">Contact</a>
                             </li>
                             <div>
-                <span class=" me-3">👤 <?php echo $_session['username']?> </span>
+                <span class=" me-3">👤  <?php echo $_session['username']?> </span>
             </div>
                         </ul>
                     </div>
@@ -92,51 +109,24 @@ if(!isset($_SESSION['id'])) {
             <!-- Dashboard Main Content -->
             <div class="container mt-4">
                 
-                <div class="card shadow">
-                    <div class="card-header">
-                        <h1>teachers list</h1>
-                    </div>
-                    <div class="card-body">
+            <div class=" row mt-5">
+   <div class="col-3"></div>
+             <div class="col-6">
+              
+                         <div class="card shadow mt-5">
+                      <div class="card-body">
+                      <h3 class="mb-4">Edit student </h3>
+                        <form action="" method="post">
+                        <input type="text" placeholder="firstname" class="form-control mt-2" name="fname" value="<?php echo $row['firstname']?>">
+                        <input type="text" placeholder="lastname" class="form-control mt-2" name="lname"  value="<?php echo $row['lastname']?>">  
+                        <input type="text" placeholder="usename" class="form-control mt-2"name="uname" value="<?php echo $row['username']?>" >           
+                              
+                        <input type="submit"  class= "btn btn-success mt-3" name="submit" value="UPDATE">
                         
-                        <table class="table table-stripped">
-                            <tr>
-                                <th>#</th>
-                                <th>id</th>
-                                <th>FIRSTNAME</th>
-                                <th>LASTNAME</th>
-                                <th>USERNAME</th>
-                                <th>ACTION</th>
-                                
-                            </tr>
-                            <tr> <?php $A=mysqli_query($con,"select * from teachers");
-                            $i=1; 
-                            while ($row=mysqli_fetch_array($A))
-                            {
-                                ?>
-                                <tr>
-                                    <td><?php
-                                    echo $i
-                                    ?></td>
-                                    <td><?php echo $row['id']  ?> </td>
-                                    <td><?php echo $row['firstname']  ?> </td>
-                                    <td><?php echo $row['lastname']  ?> </td>
-                                    <td><?php echo $row['username']  ?> </td>
-                                    <td>
-                                        <a href="edit2.php?id=<?php echo $row['id']?> " class="btn btn-info btn-sm">Edit</a>
-                                        <a href="delete2.php?id=<?php echo $row['id']?> " class="btn btn-danger btn-sm">Delete</a>
-                                    </td>
-                                </tr>
-                                <?php
-                                $i=$i+1;
-                            }
-                             ?>
-                               
-                            </tr>
-                        
-                        </table>
+                        </form>
+                        </div>
                     </div>
-                </div>
-                    
+                    </div>
             
                 <!-- Recent Activity Section -->
                 

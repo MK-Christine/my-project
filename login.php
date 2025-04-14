@@ -5,7 +5,7 @@ if(isset($_POST['submit'])){
     $username = $_POST['uname'];
     $password = $_POST['pass'];
     
- $query = mysqli_query($con, "SELECT * FROM `users` WHERE PASSWORD='$password' and username='$username' ");
+ $query = mysqli_query($con, "SELECT * FROM `users` WHERE PASSWORD='$password' and username='$username' limit 1");
  if(mysqli_num_rows($query)==0){
     echo "<script>alert('Invalid Username or password')</script>";
  }
